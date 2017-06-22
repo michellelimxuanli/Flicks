@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.michellelimfacebook.flicks.models.Config;
 import com.michellelimfacebook.flicks.models.Movie;
 
 import org.json.JSONArray;
@@ -33,15 +34,12 @@ public class MovieListActivity extends AppCompatActivity {
     public final static String TAG = "MovieListActivity";
 
     AsyncHttpClient client;
-    //the base url for loading images
-    String imageBaseUrl;
-    //the poster size to use when fetching images, part of the url
-    String posterSize;
+    Config config;
     //the list of movies now playing
     ArrayList<Movie> movies;
     //the recycler view
     RecyclerView rvMovies;
-    //the adpapter wired to the recycler view
+    //the adapter wired to the recycler view
     MovieAdapter adapter;
 
     @Override
@@ -55,7 +53,7 @@ public class MovieListActivity extends AppCompatActivity {
         //initialize the adapter
         adapter = new MovieAdapter(movies);
 
-        //resolve the recyclerview and connect a layout manager and the adapter
+        //resolve the recycler view and connect a layout manager and the adapter
         rvMovies = (RecyclerView) findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
@@ -74,13 +72,11 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    JSONObject images = response.getJSONObject("images");
-                    //get the image base Url
-                    imageBaseUrl = images.getString("secure_base_url");
-                    JSONArray posterSizeOptions = images.getJSONArray("poster_sizes");
-                    // use option at index 3 or w342 as a fallback
-                    posterSize = posterSizeOptions.optString(3, "w342");
-                    Log.i(TAG, String.format("Loaded configuration with imageBaseUrl %s and posterSize %s",imageBaseUrl, posterSize));
+                    config = new Config(response);
+                    Log.i(TAG, String.format("Loaded configuration with imageBaseUrl %s and posterSize %s",
+                            config.getImageBaseUrl(), config.getPosterSize()));
+                    //pass config to adapter
+                    adapter.setConfig(config);
                     getNowPlaying();
                 } catch (JSONException e) {
                     logError("Failed getting configuration", e, true);
@@ -113,7 +109,7 @@ public class MovieListActivity extends AppCompatActivity {
                     for (int i = 0; i < n; i++){
                         Movie movie = new Movie(results.getJSONObject(i));
                         movies.add(movie);
-                        // notify the adapater that a row was added
+                        // notify the adapter that a row was added
                         adapter.notifyItemInserted(movies.size()-1);
                     }
                     Log.i(TAG, String.format("Loaded %s movies", n));
