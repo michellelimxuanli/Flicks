@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivPosterImage"
-        android:text="MovieTitle"
+        android:text="@string/movie_title_main"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -30,7 +30,7 @@
         android:id="@+id/tvOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Movie overview and sypnosis"
+        android:text="@string/movie_overview_main"
         android:layout_below="@+id/tvTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

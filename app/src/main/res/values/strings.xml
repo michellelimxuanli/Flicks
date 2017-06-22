@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Flicks</string>
+    <string name="details_movie_title">Movie Title</string>
+    <string name="movie_overview_details">Movie Overview</string>
+    <string name="movie_title_main">Movie Title</string>
+    <string name="movie_overview_main">Movie overview and sypnosis</string>
 </resources>
