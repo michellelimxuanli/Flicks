@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="12dp"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginLeft= "15dp"
+    android:layout_marginRight= "15dp">
 
 
     <ImageView
@@ -37,5 +39,8 @@
         android:layout_below="@+id/tvTitle"
         android:layout_toRightOf="@+id/ivPosterImage"
         android:text="@string/movie_overview_main"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorGrey"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:layout_marginTop="7dp"/>
 </RelativeLayout>
