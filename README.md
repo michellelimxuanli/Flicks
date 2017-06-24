@@ -35,7 +35,7 @@ Here's a walkthrough of implemented user stories:
 
 ![Vertical Walk-though video](walkthrough_vertical.gif)
 ![Horizontal Walk-though video](walkthrough_horizontal.gif)
-![Display video in portrait and landscape] (walkthrough_video.gif)
+![Display video in portrait and landscape](walkthrough_video.gif)
 
 GIFs created with [LiceCap](http://www.cockos.com/licecap/).
 
