@@ -17,7 +17,6 @@ public class Movie {
     String backdropPath;
     Double voteAverage;
     Integer id;
-    Integer voteCount;
     String releaseDate;
     String imageUrl;
 
@@ -59,13 +58,15 @@ public class Movie {
         return id;
     }
 
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
     public String getReleaseDate() {
         return releaseDate;
     }
 
-    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }

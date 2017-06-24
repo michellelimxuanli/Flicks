@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.michellelimfacebook.flicks.MovieTrailerActivity">
+    tools:context="com.michellelimfacebook.flicks.MovieTrailerActivity"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    >
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/player"

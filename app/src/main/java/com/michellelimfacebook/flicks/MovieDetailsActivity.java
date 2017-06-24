@@ -1,12 +1,16 @@
 package com.michellelimfacebook.flicks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -31,12 +35,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
     Movie movie;
     AsyncHttpClient client;
     public final static String YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
-
+    int placeholderId;
     // the view objects
     @BindView (R.id.tvTitle) TextView tvTitle;
     @BindView (R.id.tvOverview) TextView tvOverview;
     @BindView (R.id.rbVoteAverage) RatingBar rbVoteAverage;
     @BindView (R.id.tvReleaseDate) TextView tvReleaseDate;
+    @BindView (R.id.ivTrailerImage) ImageView ivTrailerImage;
+    String videokey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +54,16 @@ public class MovieDetailsActivity extends AppCompatActivity {
         // unwrap the movie passed in via intent, using its simple name as a key
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
         Log.d("MovieDetailsActivity", String.format("Showing details for '%s'", movie.getTitle()));
+        Log.d("MovieDetailsActivity", String.format("Showing the image url '%s'", movie.getImageUrl()));
 
         // set the title and overview
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
+        //placeholderId = R.drawable.flicks_movie_placeholder;
+        //load image using glide
+        Glide.with(this)
+                .load(movie.getImageUrl())
+                .into(ivTrailerImage);
 
         // vote average is a scale of 10, convert to a scale of 5 by dividing by 2
         float voteAverage = movie.getVoteAverage().floatValue();
@@ -75,7 +87,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    String videokey;
                     JSONArray results = response.getJSONArray("results");
                     JSONObject results_object = results.getJSONObject(0);
                     //if results exists, get first object
@@ -84,7 +95,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                         videokey = results_object.getString("key");
                         log.i("MovieTrailer", YOUTUBE_BASE_URL+videokey);
                     } else {
-                        log.e("MovieTrailer", "Trailer link doesn't exist")
+                        log.e("MovieTrailer", "Trailer link doesn't exist");
                     }
                 } catch (JSONException e) {
                     logError("Failed to get youtube url", e, true);
@@ -98,7 +109,21 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
         });
 
+        //once the trailer is loaded, set up the listener
+        setupImageViewListener();
+    }
 
+    private void setupImageViewListener(){
+        Log.i("MovieDetailsActivity", "Setting up listener on movie details");
+
+        ivTrailerImage.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+               Log.i("MovieDetailsActivity","I'm clicked");
+                Intent intent = new Intent(MovieDetailsActivity.this, MovieTrailerActivity.class);
+                intent.putExtra("Video_Key", videokey);
+                startActivityForResult(intent, 20);
+            }
+        });
     }
 
     //handle errors, log and alert the user

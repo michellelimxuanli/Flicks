@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.michellelimfacebook.flicks.MovieDetailsActivity">
+    tools:context="com.michellelimfacebook.flicks.MovieDetailsActivity"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -12,6 +13,8 @@
         android:layout_height="wrap_content"
         android:text="@string/details_movie_title"
         android:textAppearance="@android:style/TextAppearance.Large"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
         android:layout_below="@+id/ivTrailerImage"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -20,13 +23,16 @@
         android:id="@+id/tvOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Overview"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/rbVoteAverage"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="5dp"
+        android:text="Overview"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp" />
 
 
     <RatingBar
@@ -46,10 +52,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Released: "
-        android:layout_below="@+id/ivTrailerImage"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/tvTitle"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="22dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/tvReleaseDate"
@@ -60,14 +66,15 @@
         android:layout_alignBottom="@+id/tvReleaseDateTitle"
         android:layout_toRightOf="@+id/tvReleaseDateTitle"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorAccent"/>
 
     <ImageView
         android:id="@+id/ivTrailerImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/flicks_backdrop_placeholder"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/flicks_backdrop_placeholder" />
 
 </RelativeLayout>

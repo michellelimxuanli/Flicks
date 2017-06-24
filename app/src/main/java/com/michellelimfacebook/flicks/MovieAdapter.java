@@ -77,8 +77,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             //load the backdrop image
             imageUrl = config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath());
         }
-
-        int placeholderId = isPortrait ? R. drawable.flicks_movie_placeholder : R.drawable.flicks_backdrop_placeholder;
+        int placeholderId = isPortrait ? R.drawable.flicks_movie_placeholder : R.drawable.flicks_backdrop_placeholder;
         ImageView imageView = isPortrait ? holder.ivPosterImage : holder.ivBackdropImage;
 
 
@@ -119,6 +118,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
                 Movie movie = movies.get(position);
+                movie.setImageUrl(config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
                 // create intent for the new activity
                 Intent intent = new Intent(context, MovieDetailsActivity.class);
                 // serialize the movie using parceler, use its short name as a key
