@@ -89,8 +89,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
         rbVoteAverage.setRating(voteAverage > 0 ? voteAverage / 2.0f : voteAverage);
         tvReleaseDate.setText(movie.getReleaseDate());
 
+        if (movie.getVideokey()==null){
+            getTrailer();
+        }
+        else {
+            //once the trailer is loaded, set up the listener
+            setupImageViewListener();
+        }
 
-        getTrailer();
+
     }
 
     private void getTrailer() {
@@ -112,6 +119,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
                     if (results_object!=null)
                     {
                         videokey = results_object.getString("key");
+                        movie.setVideokey(videokey);
                         log.i("MovieTrailer", YOUTUBE_BASE_URL+videokey);
                     } else {
                         log.e("MovieTrailer", "Trailer link doesn't exist");
@@ -127,7 +135,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 logError("Failed to get data from movie videos", throwable, true);
             }
         });
-
         //once the trailer is loaded, set up the listener
         setupImageViewListener();
     }
@@ -139,7 +146,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             public void onClick(View v){
                Log.i("MovieDetailsActivity","I'm clicked");
                 Intent intent = new Intent(MovieDetailsActivity.this, MovieTrailerActivity.class);
-                intent.putExtra("Video_Key", videokey);
+                intent.putExtra("Video_Key", movie.getVideokey());
                 startActivityForResult(intent, 20);
             }
         });

@@ -20,6 +20,7 @@ public class Movie {
     String releaseDate;
     String imageUrl;
     String imageUrl_portrait;
+    String videokey;
 
     public Movie(){}
 
@@ -77,5 +78,13 @@ public class Movie {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getVideokey() {
+        return videokey;
+    }
+
+    public void setVideokey(String videokey) {
+        this.videokey = videokey;
     }
 }
