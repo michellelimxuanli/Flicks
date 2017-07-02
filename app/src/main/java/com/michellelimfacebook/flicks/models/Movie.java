@@ -19,6 +19,7 @@ public class Movie {
     Integer id;
     String releaseDate;
     String imageUrl;
+    String imageUrl_portrait;
 
     public Movie(){}
 
@@ -64,6 +65,14 @@ public class Movie {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public void setImageUrl_portrait(String imageUrl_landscape) {
+        this.imageUrl_portrait = imageUrl_landscape;
+    }
+
+    public String getImageUrl_portrait() {
+        return imageUrl_portrait;
     }
 
     public String getImageUrl() {

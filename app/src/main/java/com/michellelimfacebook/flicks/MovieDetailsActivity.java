@@ -1,7 +1,9 @@
 package com.michellelimfacebook.flicks;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -41,7 +43,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     @BindView (R.id.tvOverview) TextView tvOverview;
     @BindView (R.id.rbVoteAverage) RatingBar rbVoteAverage;
     @BindView (R.id.tvReleaseDate) TextView tvReleaseDate;
-    @BindView (R.id.ivTrailerImage) ImageView ivTrailerImage;
+    @Nullable @BindView (R.id.ivTrailerImage) ImageView ivTrailerImage;
     String videokey;
 
     @Override
@@ -59,15 +61,32 @@ public class MovieDetailsActivity extends AppCompatActivity {
         // set the title and overview
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
-        //placeholderId = R.drawable.flicks_movie_placeholder;
+
+        //determine the current orientation
+        boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+
+        //build url for poster image
+        String imageUrl = null;
+
+        if (isPortrait) {
+            imageUrl = movie.getImageUrl();
+        } else {
+            //load the portrait image
+            imageUrl = movie.getImageUrl_portrait();
+        }
+        int placeholderId = isPortrait ? R.drawable.flicks_backdrop_placeholder : R.drawable.flicks_movie_placeholder;
+
         //load image using glide
         Glide.with(this)
-                .load(movie.getImageUrl())
+                .load(imageUrl)
+                .placeholder(placeholderId)
+                .error(placeholderId)
                 .into(ivTrailerImage);
+
 
         // vote average is a scale of 10, convert to a scale of 5 by dividing by 2
         float voteAverage = movie.getVoteAverage().floatValue();
-        rbVoteAverage.setRating(voteAverage = voteAverage > 0 ? voteAverage / 2.0f : voteAverage);
+        rbVoteAverage.setRating(voteAverage > 0 ? voteAverage / 2.0f : voteAverage);
         tvReleaseDate.setText(movie.getReleaseDate());
 
 

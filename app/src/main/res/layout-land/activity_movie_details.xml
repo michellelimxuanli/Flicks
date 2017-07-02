@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+    <FrameLayout
+        android:id="@+id/loVideo"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ivTrailerImage"
+            android:layout_height="match_parent"
+            android:layout_width="240dp"
+            app:srcCompat="@drawable/flicks_movie_placeholder"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <ImageView
+            android:id="@+id/VideoPreviewPlayButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/flicks_play_button"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details_movie_title"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/loVideo"
+        android:layout_toEndOf="@+id/loVideo" />
+
+    <TextView
+        android:id="@+id/tvOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/rbVoteAverage"
+        android:layout_marginTop="5dp"
+        android:text="Overview"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        android:layout_alignLeft="@+id/rbVoteAverage"
+        android:layout_alignStart="@+id/rbVoteAverage" />
+
+
+    <RatingBar
+        android:id="@+id/rbVoteAverage"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="3"
+        android:stepSize="0.5"
+        android:layout_below="@+id/tvReleaseDateTitle"
+        android:layout_alignLeft="@+id/tvReleaseDateTitle"
+        android:layout_alignStart="@+id/tvReleaseDateTitle" />
+
+    <TextView
+        android:id="@+id/tvReleaseDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Released: "
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvReleaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Release Date "
+        android:layout_alignBaseline="@+id/tvReleaseDateTitle"
+        android:layout_alignBottom="@+id/tvReleaseDateTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorAccent"
+        android:layout_toRightOf="@+id/tvReleaseDateTitle"
+        android:layout_toEndOf="@+id/tvReleaseDateTitle" />
+
+</RelativeLayout>
